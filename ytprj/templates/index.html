@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block style %} <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">{% endblock style %}
-{% block content %}
+{% block style %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+{% endblock style %}
 
+{% block content %}
 <div class="mainBody">
     {% include 'partials/sidebar.html' %}
 
@@ -13,7 +15,7 @@
         <div class="drop-down-container">
             <h1 style="font-size: 20px;">Recommended</h1>
         </div>
-            
+   
         <div class="videos__container">
             <!-- Single Video Starts Here -->
             {% for v in video %}
@@ -44,5 +46,7 @@
         </div>
     </div>
 </div>
+
+
 
 {% endblock content %}

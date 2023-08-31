@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include
-from core.views import index
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -11,6 +10,7 @@ urlpatterns = [
     path('', include('core.urls')),
     path('yt_auth/', include('userauths.urls')),   
     path("c/", include("channel.urls")),
+    path("studio/", include("useradmin.urls")),
     
 ]
 

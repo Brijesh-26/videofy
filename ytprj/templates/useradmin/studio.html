@@ -4,9 +4,9 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0" />
-        <title>Kanakku - Bootstrap Admin HTML Template</title>
+        <title>VideoFy- Dashboard </title>
 
-        <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}" />
+        <link rel="shortcut icon" href="{% static 'images/youtube-icon.svg' %}" />
 
         <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
 
@@ -21,13 +21,13 @@
             <div class="header header-one">
                 <div class="header-left header-left-one">
                     <a href="{% url 'index' %}" class="logo">
-                        <img src="https://static.wikia.nocookie.net/logopedia/images/c/c0/YouTube_Studio_short.svg/revision/latest?cb=20200216210451" alt="Logo" />
+                        <img src="{% static 'images/youtube-rectangle.svg' %}" alt="Logo" />
                     </a>
                     <a href="{% url 'index' %}" class="white-logo">
-                        <img src="https://static.wikia.nocookie.net/logopedia/images/c/c0/YouTube_Studio_short.svg/revision/latest?cb=20200216210451" alt="Logo" />
+                        <img src="{% static 'images/youtube-rectangle.svg' %}" alt="Logo" />
                     </a>
                     <a href="{% url 'index' %}" class="logo logo-small">
-                        <img src="https://static.wikia.nocookie.net/logopedia/images/c/c0/YouTube_Studio_short.svg/revision/latest?cb=20200216210451" alt="Logo" width="30" height="30" />
+                        <img src="{% static 'images/youtube-rectangle.svg' %}" alt="Logo" width="30" height="30" />
                     </a>
                 </div>
 
@@ -51,15 +51,15 @@
                     <li class="nav-item dropdown has-arrow main-drop">
                         <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                             <span class="user-img">
-                                <img src="{{ channel.image.url }}" style="width: 50px; height: 50px; object-fit: cover;" alt="" />
+                                <img src="" style="width: 50px; height: 50px; object-fit: cover;" alt="" />
                                 <span class="status online"></span>
                             </span>
                             <span>{{ channel.channel_name }}</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'channel-profile' request.user.id %}"><i data-feather="user" class="me-1"></i> Channel</a>
-                            <a class="dropdown-item" href="{% url 'channel-profile' request.user.id %}"><i data-feather="settings" class="me-1"></i> Settings</a>
-                            <a class="dropdown-item" href="{% url 'sign-out' %}"><i data-feather="log-out" class="me-1"></i> Logout</a>
+                            <a class="dropdown-item" href="{% url 'channel-profile' channel.id %}"><i data-feather="user" class="me-1"></i> Channel</a>
+                            <!-- <a class="dropdown-item" href="{% url 'channel-profile' request.user.id %}"><i data-feather="settings" class="me-1"></i> Settings</a> -->
+                            <a class="dropdown-item" href="{% url 'logout' %}"><i data-feather="log-out" class="me-1"></i> Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -74,7 +74,7 @@
                                 <a href="{% url 'studio' %}"><i data-feather="home"></i> <span>Dashboard</span></a>
                             </li>
                             <li>
-                                <a href="{% url 'sign-out' %}"><i data-feather="users"></i> <span>Logout</span></a>
+                                <a href="{% url 'logout' %}"><i data-feather="users"></i> <span>Logout</span></a>
                             </li>
                             
                         </ul>
@@ -153,7 +153,7 @@
                                             <h5 class="card-title">All Videos</h5>
                                         </div>
                                         <div class="col-auto">
-                                            <a href="invoices.html" class="btn-right btn btn-sm btn-outline-primary">
+                                            <a href="" class="btn-right btn btn-sm btn-outline-primary">
                                                 View All
                                             </a>
                                         </div>
@@ -203,7 +203,7 @@
                                                         <div class="dropdown dropdown-action">
                                                             <a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
                                                             <div class="dropdown-menu dropdown-menu-right">
-                                                                <a class="dropdown-item" href="{% url 'video-edit' v.user.id v.id %}"><i class="far fa-edit me-2"></i>Edit</a>
+                                                                <a class="dropdown-item" href="{% url 'video-edit' channel.id v.id %}"><i class="far fa-edit me-2"></i>Edit</a>
                                                                 <a class="dropdown-item" href="{% url 'video-detail' v.id  %}"><i class="far fa-eye me-2"></i>View</a>
                                                                 <a class="dropdown-item" href="{% url 'video-delete' v.id  %}"><i class="far fa-trash-alt me-2"></i>Delete</a>
                                                                 <!-- <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-check-circle me-2"></i>Mark as sent</a> -->

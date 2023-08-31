@@ -2,17 +2,18 @@ const menu = document.querySelector("#menu")
 const dropDown = document.querySelector("#drop-down")
 const sidebar = document.querySelector(".sidebar")
 const drop_down = document.querySelector(".dropdown-content-background")
-console.log(sidebar);
-console.log(dropDown);
-console.log(drop_down);
+console.log("start")
+console.log(`this is first ${sidebar}`);
+console.log(`this is asli dropdown ${dropDown}`)
 
 menu.addEventListener("click", function(){
     sidebar.classList.toggle("show-sidebar")
 })
 
-
 dropDown.addEventListener("click", function(){
-    drop_down.classList.toggle("show-dropdown")
+    console.log("pressed")
+    // dropDown.classList.toggle("show-dropdown")
+    dropDown.classList.replace('material-icons display-this', 'dropdown-content-background')
 })
 
 

@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from core.models import Video, Comment
+from userauths.models import Profile
 from django.views.decorators.csrf import csrf_exempt
 from channel.models import Channel
 from django.db.models import Count
+from django.db.models import Q
+from taggit.models import Tag
 
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -11,7 +14,7 @@ from django.core.exceptions import ObjectDoesNotExist
 def index(request):
     video= Video.objects.filter(visibility = "public")
     context= {
-        "video": video
+        "video": video,
     }
     return render(request, 'index.html', context)
 
@@ -32,6 +35,11 @@ def videoDetail(request, pk):
 
     # Getting all comment related to a video
     comment = Comment.objects.filter(active=True, video=video).order_by("-date")
+    print('******************************')
+    print(video.id)
+    print('******************************')
+    # print(similar_videos.id)
+    print('******************************')
 
     context = {
         "video":video,
@@ -40,6 +48,24 @@ def videoDetail(request, pk):
         "similar_videos":similar_videos,
     }
     return render(request, "video.html", context)
+
+
+
+def save_video(request, video_id):
+    video = Video.objects.get(id=video_id)
+
+    user = request.user.profile
+    # user = Profile.objects.get(user=request.user)
+
+    if video in user.saved_videos.all():
+        user.saved_videos.remove(video)
+    else:
+        user.saved_videos.add(video)
+    return HttpResponseRedirect(request.META.get("HTTP_REFERER"))
+
+
+
+
 
 def ajax_save_comment(request):
     if request.method=="POST":
@@ -123,3 +149,64 @@ def load_video_likes(request, id):
     return JsonResponse(likes_lists, safe= False, status= 200)
     
     
+    
+def searchView(request):
+    video = Video.objects.filter(visibility="public").order_by("-date")
+    query = request.GET.get("q")
+    if query:
+        video = video.filter(
+            Q(title__icontains=query)|
+            Q(description__icontains=query)
+        ).distinct()
+    
+    context = {
+        "video":video,
+        "query":query,
+
+    }
+    return render(request, "search.html", context)
+
+
+
+def tag_list(request, tag_slug=None):
+    video = Video.objects.filter(visibility="public").order_by("-date")
+
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        video = video.filter(tags__in=[tag])
+
+    context = {
+    "video":video,
+    "tag":tag,
+
+    }
+    return render(request, "tags.html", context)
+
+
+
+# writing code for sidebar
+
+# BSDK ISKO JLDI SHI KR
+
+def liked_videos(request):
+    user= request.user
+    video= Video.objects.filter(likes=user.id)
+    
+    
+    context= {
+        "video": video
+    }
+    return render(request, "liked_video.html", context)
+
+
+def saved_videos(request):
+    
+    profile= Profile.objects.get(user=request.user.id)
+    
+    video= profile.saved_videos
+    
+    context= {
+        "video": video
+    }
+    return render(request, "saved-video.html", context)

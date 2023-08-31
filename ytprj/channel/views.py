@@ -18,7 +18,7 @@ def channel_profile(request, channel_name):
     except:
         
         video_featured = None
-        # messages.warning(request, f"Only one video can be featured!")
+        messages.warning(request, f"Only one video can be featured!")
         
     context = {
         "videos":videos,
@@ -124,7 +124,7 @@ def video_upload(request):
             new_form.save()
             form.save_m2m()
             messages.success(request, f"Video Uploaded Successfully.")
-            return redirect("studio")
+            return redirect("channel-profile", user.channel.id)
     else:
         form = VideoForm()
     context = {
@@ -139,6 +139,10 @@ def video_edit(request, channel_id, video_id):
     video = Video.objects.get(id=video_id)
     channel = Channel.objects.get(id=channel_id)
     user = request.user
+    print('*************************************************************')
+    print(video.user.id)
+    print(video.id)
+    print('*************************************************************')
 
 
     if request.method == "POST":
@@ -149,12 +153,13 @@ def video_edit(request, channel_id, video_id):
             new_form.save()
             form.save_m2m()
             messages.success(request, f"Video Edited Successfully.")
-            return redirect("studio")
+            return redirect("channel-profile", user.channel.id)
     else:
         form = VideoForm(instance=video)
     context = {
         "form":form,
         "video":video,
+        "channel": channel
     }
     return render(request, "channel/upload-video.html", context)
 
@@ -190,6 +195,7 @@ def create_community_post(request, channel_id):
         form = CommunityForm()
     context = {
         "form":form,
+        "channel": channel,
     }
     return render(request, "channel/create-post.html", context)
 

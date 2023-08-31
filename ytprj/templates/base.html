@@ -46,10 +46,10 @@
     <div class="header">
         <!-- Header menu Start -->
 
-        <a href="{% url 'index' %}">
+        <a href="#">
             <div class="header__left">
                 <i id="menu" class="material-icons">menu</i>
-                <img src="https://www.xda-developers.com/files/2017/08/After-12-Years-Google-Gives-YouTube-a-New-Logo-1900x700_c.png" alt="">
+                <img src="{% static 'images/youtube-rectangle.svg' %}" alt="">
             </div>
         </a>
         <!-- Header menu end -->
@@ -57,7 +57,7 @@
         <!-- Header seach Start -->
 
         <div class="header__search">
-            <form action="#" method="GET">
+            <form action="/video/search/" method="GET">
                 <input type="text" placeholder="Search" name="q">
                 <button><i class="material-icons">search</i></button>
             </form>
@@ -66,23 +66,37 @@
         
         <!-- Header Icons Start -->
         <div class="header__icons">
-            <i class="material-icons display-this">search</i>
-            <a href="#"><i class="material-icons ">videocam</i></a>
-            <i class="material-icons">apps</i>
-            {% if request.user.is_authenticated %}
-            <a href="#"><i class="material-icons">add</i></a>
-            {% else %}
-            <a href="#"><i class="material-icons">add</i></a>
+            <!-- <i class="material-icons display-this">search</i> -->
 
-            {% endif %}
-            
-            <i class="material-icons display-this">notifications</i>
-            
             {% if request.user.is_authenticated %}
-            <a href="#"><i id="drop-down" class="material-icons display-this">account_circle</i></a>
+            <a href="{% url 'upload-video' %}"><i class="material-icons ">videocam</i></a>
+            
             {% else %}
-            <a href="#"><i id="drop-down" class="material-icons display-this">account_circle</i></a>
+            <a href="/yt_auth/accounts/login/"><i class="material-icons ">videocam</i></a>
             {% endif %}
+            <!-- <a href="{% url 'upload-video' %}"><i class="material-icons ">plus</i></a> -->
+            <!-- <a href="/studio/"><i class="material-icons">apps</i></a> -->
+            
+            <!-- {% if request.user.is_authenticated %}
+            {% url 'create-post' request.user.id %}
+            <a href=""><i class="material-icons">add</i></a>
+            {% else %}
+            <a href="/yt_auth/accounts/login/"><i class="material-icons">add</i></a>
+
+            {% endif %} -->
+            
+            <!-- <i class="material-icons display-this">notifications</i> -->
+            
+            <!-- {% if request.user.is_authenticated %} -->
+            <!-- {% url 'channel-profile' request.user.id %} -->
+                <!-- <a href="#">
+                    <i id="drop-down" class="material-icons display-this">account_circle</i>
+                </a>
+            {% else %}
+                <a href="/yt_auth/accounts/login/">
+                    <i id="drop-down" class="material-icons display-this">account_circle</i>
+                </a>
+            {% endif %} -->
                 
         </div>
         <!-- Header Icons Ends -->

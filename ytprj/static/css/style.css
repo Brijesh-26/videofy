@@ -850,7 +850,9 @@ display: flex;
   content: "";
 }
 
-
+.intro-video{
+  /* padding: 5px;  */
+}
 
 .channel-intro-video{
   flex-direction: column;
@@ -1165,7 +1167,10 @@ a{
   margin-right: 8px;
 }
 
-
+.file-input:hover > .button {
+  /* background: dodgerblue; */
+  /* color: white; */
+}
 
 .file-input > .label {
   color: #333;

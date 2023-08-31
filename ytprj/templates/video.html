@@ -39,7 +39,7 @@
                 <div class="tag">
                     <label for="" class="tags">
                         {% for tag in video.tags.all %}
-                        <a id="channel-tag" href="#">
+                        <a id="channel-tag" href="{% url 'tags' tag.slug %}">
                             #{{tag.name}}
                         </a>
                         {% endfor %}
@@ -74,17 +74,26 @@
                             <a href=""><i class="fa fa-scissors"></i></a>
                             <label for="">Clip</label>
                         </div> -->
-
-                        <div class="icon">
-                            <a href="#">
-                                <i class="fa fa-bookmark"></i>
-                                <label for="">Save</label>
-                            </a>
-                        </div>
+                        {% if user.is_authenticated %}
+                            <div class="icon">
+                                <!-- {% url 'save-video' video.id %} -->
+                                <a href="">
+                                    <i class="fa fa-bookmark"></i>
+                                    <label for="">Save</label>
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="icon">
+                                <a href="/yt_auth/accounts/login/">
+                                    <i class="fa fa-bookmark"></i>
+                                    <label for="">Save</label>
+                                </a>
+                            </div>
+                        {% endif %}
 
                         {% if video.user == request.user %}
                         <div class="icon">
-                            <a href="{% url 'video-edit' video.user.id video.id %}"><i class="fa fa-pen"></i></a>
+                            <a href="{% url 'video-edit' channel.id video.id %}"><i class="fa fa-pen"></i></a>
                             <label for="">Edit</label>
                         </div>
                         {% endif %}
@@ -139,7 +148,7 @@
                         </div>
                     </form>
                     {% else %}
-                    <a href="{% url 'sign-in' %}" style="margin-top: 10px;">*Login To Comment</a>
+                    <a href="{% url 'login_attempt' %}" style="margin-top: 10px;">*Login To Comment</a>
                     {% endif %}
                 </div>
 
@@ -208,12 +217,13 @@
                 </div>
 
                 {% for s in similar_videos %}
-                <div class="video_items vide_sidebar flex">
-                    <a href="">
+                <div class="video_items video_sidebar flex">
+                    <!-- open the another video  -->
+                    <a href="{% url 'video-detail' s.id %}">
                         {% if s.image %}
                         <img src="{{s.image.url}}" alt="" >
                         {% else %}
-                        <img src="http://127.0.0.1:8000/watch/1/" alt="">
+                        <img src="{% static 'images/noimage.jpg' %}" alt="">
 
                         {% endif %}
                     </a>

@@ -4,7 +4,7 @@
     <div class="sidebar__categories">
         
         <!-- Single Category -->
-        <a href="#">
+        <a href="{% url 'index' %}">
             <div class="sidebar__category">
                 <i class="material-icons">home</i>
                 <span>Home</span>
@@ -20,32 +20,32 @@
         </a>
 
         <!-- Single Category -->
-        <div class="sidebar__category">
+        <!-- <div class="sidebar__category">
             <i class="material-icons">subscriptions</i>
             <span>Subscriptions</span>
-        </div>
+        </div> -->
     </div>
     <hr>
 
 
     <div class="sidebar__categories">
-        <a href="#">
+        <!-- <a href="#"> -->
             <!-- Single Category -->
-            <div class="sidebar__category">
+            <!-- <div class="sidebar__category">
                 <i class="material-icons">library_add_check</i>
                 <span>Library</span>
             </div>
-        </a>
+        </a> -->
             
         <!-- Single Category -->
-        <div class="sidebar__category">
+        <!-- <div class="sidebar__category">
             <i class="material-icons">history</i>
             <span>History</span>
-        </div>
+        </div> -->
 
         <!-- Single Category -->
         {% if request.user.is_authenticated %}
-        <a href="#">
+        <a href="/studio/">
 
             <div class="sidebar__category">
                 <i class="material-icons">play_arrow</i>
@@ -63,7 +63,7 @@
         {% endif %}
 
         <!-- Single Category -->
-        <a href="#">
+        <a href="saved_videos/">
 
         <div class="sidebar__category">
             <i class="material-icons">watch_later</i>
@@ -71,10 +71,14 @@
         </div>
         </a>
         <!-- Single Category -->
-        <div class="sidebar__category">
-            <i class="material-icons">thumb_up</i>
-            <span>Liked Videos</span>
-        </div>
+        <a href="liked_videos/">
+
+            <div class="sidebar__category">
+                <i class="material-icons">thumb_up</i>
+                <span>Liked Videos</span>
+            </div>
+        </a>
+        
 
         
     </div>
@@ -84,7 +88,7 @@
         
         {% if not request.user.is_authenticated %}
         <!-- Single Category -->
-        <a href="#">
+        <a href="{% url 'login_attempt' %}">
             <div class="sidebar__category">
                 <i class="material-icons">login</i>
                 <span>Login</span>
@@ -92,7 +96,7 @@
         </a>
         {% else %}
         <!-- Single Category -->
-        <a href="#">
+        <a href="{% url 'logout' %}">
             <div class="sidebar__category">
                 <i class="material-icons">logout</i>
                 <span>Logout</span>
