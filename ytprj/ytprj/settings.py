@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'channel',
     'core',
     "taggit",
-    'corsheaders',
     'useradmin',
 ]
 
