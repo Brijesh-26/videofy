@@ -47,7 +47,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ytprj.urls'
+ROOT_URLCONF = 'YtPrj.urls'
 
 TEMPLATES = [
     {
@@ -65,7 +65,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ytprj.wsgi.application'
+WSGI_APPLICATION = 'YtPrj.wsgi.application'
 
 
 # Database
